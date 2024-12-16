@@ -28,7 +28,7 @@ class Data {
             users.add(user);
         }
 
-        List admins = List.of(
+        List<User> admins = List.of(
             new User(getNextId(), "Glynn Joinsey", "gjoinsey1@blogger.com"),
             new User(getNextId(), "Sarina Crosi", "scrosi4@cam.ac.uk"),
             new User(getNextId(), "Emmit Brundle", "brundle@cam.ac.uk")

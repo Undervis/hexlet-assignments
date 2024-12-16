@@ -1,5 +1,6 @@
 package exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import  org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import exercise.model.User;
 import exercise.component.UserProperties;
@@ -28,7 +29,16 @@ public class Application {
 
     @GetMapping("/admins")
     public List<String> getAdmins() {
-        return userProperties.getAdmins().stream().sorted().toList();
+        var admins = userProperties.getAdmins();
+        List<String> adminsNames = new ArrayList<>();
+        users.forEach(user -> {
+            admins.forEach(admin -> {
+                if (admin.equals(user.getEmail())) {
+                    adminsNames.add(user.getName());
+                }
+            });
+        });
+        return adminsNames;
     }
     // END
 
@@ -40,8 +50,8 @@ public class Application {
     @GetMapping("/users/{id}")
     public Optional<User> show(@PathVariable Long id) {
         var user = users.stream()
-            .filter(u -> u.getId() == id)
-            .findFirst();
+                .filter(u -> u.getId() == id)
+                .findFirst();
         return user;
     }
 
