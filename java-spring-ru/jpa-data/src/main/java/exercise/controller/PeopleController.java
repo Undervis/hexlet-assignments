@@ -38,6 +38,7 @@ public class PeopleController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Person addPerson(@RequestBody Person person) {
         personRepository.save(person);
         return person;
