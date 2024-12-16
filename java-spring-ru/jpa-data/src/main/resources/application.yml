@@ -1,0 +1,11 @@
+---
+
+# BEGIN
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+# END
+server:
+  port: 7000
