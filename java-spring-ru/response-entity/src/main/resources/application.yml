@@ -1,0 +1,12 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+# Включаем логгирование, чтобы вы смогли увидеть код ответа в логах приложения
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+server:
+  port: 7000
