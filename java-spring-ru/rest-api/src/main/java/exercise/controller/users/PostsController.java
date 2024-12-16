@@ -20,7 +20,7 @@ public class PostsController {
         return ResponseEntity.ok(posts.stream().filter(p -> p.getUserId() == id).toList());
     }
 
-    @PostMapping("/{id}/users")
+    @PostMapping("/{id}/posts")
     public ResponseEntity<Post> addPostToUser(@PathVariable int id, @RequestBody Post post) {
         post.setUserId(id);
         posts.add(post);
