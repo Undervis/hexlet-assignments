@@ -29,7 +29,7 @@ public class ProductsController {
     @GetMapping
     public ResponseEntity<List<Product>> getAll(@RequestParam(defaultValue = "-1") int min, @RequestParam(defaultValue = "-1") int max) {
         if (min < 0 && max < 0) {
-            return ResponseEntity.ok(productRepository.findAll());
+            return ResponseEntity.ok(productRepository.findAll().stream().sorted(Comparator.comparing(Product::getPrice)).toList());
         } else if (min > 0) {
             return ResponseEntity.ok(
                     productRepository.findProductsByPriceGreaterThan(min).stream().sorted(Comparator.comparing(Product::getPrice)).toList()
