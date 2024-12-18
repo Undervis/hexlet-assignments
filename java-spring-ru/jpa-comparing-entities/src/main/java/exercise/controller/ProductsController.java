@@ -35,6 +35,7 @@ public class ProductsController {
 
     // BEGIN
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Product addProduct(@RequestBody Product product) {
         if (productRepository.findOne(Example.of(product)).equals(product)) {
             throw new ResourceAlreadyExistsException("Product already exists");
