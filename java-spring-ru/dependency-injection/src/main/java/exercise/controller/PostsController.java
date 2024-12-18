@@ -38,7 +38,7 @@ public class PostsController {
     @GetMapping("/{id}")
     public Post getPost(@PathVariable Long id) {
         return postRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("This post does not exists")
+                () -> new ResourceNotFoundException("Post with id " + id + " not found")
         );
     }
 
@@ -59,7 +59,7 @@ public class PostsController {
             postRepository.save(toUpdatePost);
             return toUpdatePost;
         } else {
-            throw new ResourceNotFoundException("This post does not exists");
+            throw new ResourceNotFoundException("Post with id " + id + " not found");
         }
     }
 

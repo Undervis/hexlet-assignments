@@ -36,7 +36,7 @@ public class CommentsController {
     @GetMapping("/{id}")
     public Comment getComment(@PathVariable Long id) {
         return commentRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("This comment does not exists")
+                () -> new ResourceNotFoundException("Comment with id " + id + " not found")
         );
     }
 
@@ -57,7 +57,7 @@ public class CommentsController {
             commentRepository.save(updatedComment);
             return updatedComment;
         } else {
-            throw new ResourceNotFoundException("This comment does not exists");
+            throw new ResourceNotFoundException("Comment with id " + id + " not found");
         }
     }
 }
