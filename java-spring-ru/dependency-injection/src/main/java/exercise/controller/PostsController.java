@@ -37,7 +37,9 @@ public class PostsController {
 
     @GetMapping("/{id}")
     public Post getPost(@PathVariable Long id) {
-        return postRepository.findById(id).orElse(null);
+        return postRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("This post does not exists")
+        );
     }
 
     @PostMapping
