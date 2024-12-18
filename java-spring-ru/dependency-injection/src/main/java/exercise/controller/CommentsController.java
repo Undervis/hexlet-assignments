@@ -60,5 +60,10 @@ public class CommentsController {
             throw new ResourceNotFoundException("Comment with id " + id + " not found");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteComment(@PathVariable Long id) {
+        commentRepository.deleteById(id);
+    }
 }
 // END
