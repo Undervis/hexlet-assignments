@@ -1,6 +1,7 @@
 package exercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +38,12 @@ public class ProductsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product addProduct(@RequestBody Product product) {
-        if (productRepository.findOne(Example.of(product)).equals(product)) {
+        var productToFind = productRepository.findOne(Example.of(product));
+        if (productToFind.isPresent()) {
             throw new ResourceAlreadyExistsException("Product already exists");
-        } else {
-            productRepository.save(product);
-            return product;
         }
+        productRepository.save(product);
+        return product;
     }
     // END
 
